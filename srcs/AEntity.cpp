@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:05:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:04:46 by olysogub         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:14:28 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ AEntity::~AEntity(void)
 {
 }
 
-AEntity::e_type		getType(void) const
+AEntity::e_type		AEntity::getType(void) const
 {
 	return (_type);
 }
 
-AEntity				&AEntity:operator=(AEntity const &rhs)
+AEntity				&AEntity::operator=(AEntity const &rhs)
 {
 	_type = rhs._type;
 	_hp = rhs._hp;
@@ -40,7 +40,7 @@ AEntity				&AEntity:operator=(AEntity const &rhs)
 	return (*this);
 }
 
-bool					AEntity::moveToDirection(int x, int y)
+bool				AEntity::moveToDirection(int x, int y)
 {
 	int			nx;
 	int			ny;

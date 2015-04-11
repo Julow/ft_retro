@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:09:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:52:35 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,37 @@ void				Game::start(void)
 	}
 }
 
+EntityArray			&Game::getEntities(void)
+{
+	return (_ents)
+}
+
+EntityArray			&Game::getProjectiles(void)
+{
+	return (_projectiles)
+}
+
+PlayerEntity		&Game::getPlayer(void)
+{
+	return (_player)
+}
+
+t_pt				Game::getOffset(void) const
+{
+	return (_offset);
+}
+
+void				Game::_updateOffset(void)
+{
+	t_pt				pt;
+
+	getmaxyx(stdscr, pt.x, pt.y);
+	if (pt.x == _offset.x || pt.y == _offset.y)
+		return ;
+	_offset.x = (GAME_WIDTH - pt.x) / 2;
+	_offset.y = (GAME_HEIGHT - pt.y) / 2;
+}
+
 void				Game::_handleKey(int key)
 {
 	if (key == KEY_UP)
@@ -47,6 +78,8 @@ void				Game::_handleKey(int key)
 		_player.move(-1, 0);
 	else if (key == KEY_LEFT)
 		_player.move(0, -1);
+	else
+		_updateOffset();
 }
 
 void				Game::_update(float t)

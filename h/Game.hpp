@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 16:58:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:52:00 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@ public:
 
 	void			start(void);
 
+	EntityArray		&getEntities(void);
+	EntityArray		&getProjectiles(void);
+	PlayerEntity	&getPlayer(void);
+
+	t_pt			getOffset(void) const;
+
 protected:
 	EntityArray		_ents;
 	EntityArray		_projectiles;
 
 	PlayerEntity	_player;
 
+	t_pt			_offset;
+
+	void			_updateOffset(void);
 	void			_handleKey(int key);
 	void			_update(float t);
 	void			_render(void);

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:22:35 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:04:53 by olysogub         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:46:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ public:
 	enum				e_type
 	{
 		ENNEMI,
+		PROJECTILE,
 		PLAYER
 	};
 

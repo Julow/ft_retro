@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_retro.hpp                                       :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/11 13:10:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:33:38 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/04/11 17:25:54 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/04/11 17:48:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_RETRO_HPP
-# define FT_RETRO_HPP
+#ifndef WEAPON_HPP
+# define WEAPON_HPP
 
-# include <ncurses.h>
+# include "ft_retro.hpp"
+# include "Projectile.hpp"
 
-# ifndef NULL
-#  define NULL			((void*)0)
-# endif
-
-# define GAME_WIDTH		500
-# define GAME_HEIGHT	300
-
-typedef struct	s_pt
+class	Weapon
 {
-	int				x;
-	int				y;
-}				t_pt;
+public:
+	Weapon(Game &game, int dmg);
+	Weapon(Weapon const &src);
+	virtual ~Weapon(void);
 
-class	HitBox;
-class	AEntity;
-class	Game;
+	int				getDmg(void) const;
+
+	Projectile		*createProjectile(AEntity &owner);
+
+	Weapon			&operator=(Weapon const &rhs);
+
+protected:
+	Game			&_game;
+
+	int				_dmg;
+
+private:
+	Weapon(void);
+};
 
 #endif

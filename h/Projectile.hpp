@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PlayerEntity.hpp                                   :+:      :+:    :+:   */
+/*   Projectile.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/11 14:02:15 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:49:28 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/04/11 17:19:30 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/04/11 17:53:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYERENTITY_HPP
-# define PLAYERENTITY_HPP
+#ifndef PROJECTILE_HPP
+# define PROJECTILE_HPP
 
-#include "ft_retro.hpp"
-#include <iostream>
-#include "AEntity.hpp"
-#include "Game.hpp"
+# include "ft_retro.hpp"
+# include "Weapon.hpp"
 
-class	PlayerEntity : AEntity
+class	Projectile : public AEntity
 {
 public:
-	PlayerEntity(int x, int y);
-	PlayerEntity(PlayerEntity const &src);
-	virtual ~PlayerEntity(void);
-	PlayerEntity			&operator=(PlayerEntity const &rhs);
+	Projectile(Game &game, Entity::e_type ownType, int x, int y, int dmg);
+	Projectile(Projectile const &src);
+	virtual ~Projectile(void);
+
+	e_type				getOwnerType(void) const;
+
+	int					getDmg(void) const;
 
 	virtual void		update(float t);
 	virtual void		render(void);
 
-protected:
-	Weapon				_weapon;
+	Projectile			&operator=(Projectile const &rhs);
 
-	virtual void		_move(void);
-	virtual void		_die(void);
+protected:
+	e_type				_ownType;
+
+	int					_dmg;
 
 private:
-	PlayerEntity(void);
+	Projectile(void);
 };
 
 #endif
