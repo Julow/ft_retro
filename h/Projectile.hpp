@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:30 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:53:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:56:16 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 # define PROJECTILE_HPP
 
 # include "ft_retro.hpp"
-# include "Weapon.hpp"
+# include "AEntity.hpp"
 
 class	Projectile : public AEntity
 {
 public:
-	Projectile(Game &game, Entity::e_type ownType, int x, int y, int dmg);
-	Projectile(Projectile const &src);
+	Projectile(Game &game, AEntity::e_type ownType, int x, int y, int dmg);
 	virtual ~Projectile(void);
 
-	e_type				getOwnerType(void) const;
+	AEntity::e_type		getOwnerType(void) const;
 
 	int					getDmg(void) const;
 
 	virtual void		update(float t);
 	virtual void		render(void);
 
-	Projectile			&operator=(Projectile const &rhs);
-
 protected:
-	e_type				_ownType;
+	AEntity::e_type		_ownType;
 
 	int					_dmg;
 
 private:
 	Projectile(void);
+	Projectile(Projectile const &src);
+	Projectile			&operator=(Projectile const &rhs);
 };
 
 #endif

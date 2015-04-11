@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:10:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:33:38 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:14:10 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef struct	s_pt
 
 class	HitBox;
 class	AEntity;
+class	PlayerEntity;
 class	Game;
+class	Weapon;
+class	EntityArray;
+class	Projectile;
 
 #endif

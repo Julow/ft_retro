@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:58:26 by olysogub         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:52:03 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define GAME_HPP
 
 # include "ft_retro.hpp"
-# include "AEntity.hpp"
-# include <time.h>
+# include "PlayerEntity.hpp"
+# include "EntityArray.hpp"
 # include <sstream>
 # include <ctime>
 
@@ -46,6 +46,7 @@ protected:
 	void			_update(float t);
 	void			_render(void);
 	void			_printBorder(void);
+	void			_printGameInfo(void);
 	int				_score;
 	time_t			_tbegin;
 
@@ -53,7 +54,6 @@ protected:
 
 private:
 	Game(Game const &src);
-
 	Game			&operator=(Game const &rhs);
 };
 

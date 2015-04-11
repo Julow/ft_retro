@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:11:28 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:11:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:28:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,32 @@ HitBox::HitBox(int x, int y, int width, int height)
 {
 }
 
-HitBox::HitBox(HitBox const &src)
-{
-	*this = src;
-}
-
 HitBox::~HitBox(void)
 {
 }
 
-bool			HitBox::collide(HitBox const &box)
+int				HitBox::getX(void) const
 {
-	return (false);
+	return (_x);
 }
 
-HitBox			&HitBox::operator=(HitBox const &rhs)
+int				HitBox::getY(void) const
 {
-	_x = rhs._x;
-	_y = rhs._y;
-	_width = rhs._width;
-	_height = rhs._height;
-	return (*this);
+	return (_y);
+}
+
+int				HitBox::getWidth(void) const
+{
+	return (_width);
+}
+
+int				HitBox::getHeight(void) const
+{
+	return (_height);
+}
+
+bool			HitBox::collide(HitBox const &box) const
+{
+	(void)box;
+	return (false);
 }

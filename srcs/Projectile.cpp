@@ -6,27 +6,22 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:07 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:01:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:57:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Projectile.hpp"
 
-Projectile::Projectile(Game &game, Entity::e_type ownType, int x, int y, int dmg)
+Projectile::Projectile(Game &game, AEntity::e_type ownType, int x, int y, int dmg)
 	: AEntity(game, PROJECTILE, x, y, 1, 1), _ownType(ownType), _dmg(dmg)
 {
-}
-
-Projectile::Projectile(Projectile const &src)
-{
-	*this = src;
 }
 
 Projectile::~Projectile(void)
 {
 }
 
-e_type				Projectile::getOwnerType(void) const
+AEntity::e_type		Projectile::getOwnerType(void) const
 {
 	return (_ownType);
 }
@@ -45,10 +40,4 @@ void				Projectile::render(void)
 int					Projectile::getDmg(void) const
 {
 	return (_dmg);
-}
-
-Projectile			&Projectile::operator=(Projectile const &rhs)
-{
-	AEntity::operator=(rhs);
-	return (*this);
 }

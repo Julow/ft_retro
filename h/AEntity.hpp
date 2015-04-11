@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:22:35 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:46:08 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:53:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define AENTITY_HPP
 
 # include "ft_retro.hpp"
-# include "Game.hpp"
 # include "HitBox.hpp"
 
 class	AEntity : public HitBox
@@ -27,8 +26,7 @@ public:
 		PLAYER
 	};
 
-	AEntity(Game &game, Entity::e_type type, int x, int y, int w, int h);
-	AEntity(AEntity const &src);
+	AEntity(Game &game, AEntity::e_type type, int x, int y, int w, int h);
 	virtual ~AEntity(void);
 
 	e_type				getType(void) const;
@@ -37,8 +35,6 @@ public:
 	virtual void		render(void) = 0;
 	virtual bool		moveToDirection(int x, int y);
 
-	AEntity				&operator=(AEntity const &rhs);
-
 protected:
 	Game				&_game;
 
@@ -46,12 +42,10 @@ protected:
 
 	int					_hp;
 
-	virtual void		_move(void) = 0;
-
-	virtual void		_die(void);
-
 private:
 	AEntity(void);
+	AEntity(AEntity const &src);
+	AEntity				&operator=(AEntity const &rhs);
 };
 
 #endif

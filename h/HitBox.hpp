@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:15 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 13:49:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:20:54 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ class	HitBox
 {
 public:
 	HitBox(int x, int y, int width, int height);
-	HitBox(HitBox const &src);
 	virtual ~HitBox(void);
 
 	bool				collide(HitBox const &box) const;
 
-	HitBox				&operator=(HitBox const &rhs);
+	int					getX(void) const;
+	int					getY(void) const;
+	int					getWidth(void) const;
+	int					getHeight(void) const;
 
 protected:
 	int					_x;
@@ -34,6 +36,8 @@ protected:
 
 private:
 	HitBox(void);
+	HitBox(HitBox const &src);
+	HitBox				&operator=(HitBox const &rhs);
 };
 
 #endif

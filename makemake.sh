@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/07 22:29:29 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/09 00:52:58 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/11 19:36:25 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ function includes()
 C_FILES=`find "$C_DIR" -type f -print | grep -E '\.c(pp)?$'`
 O_FILES=""
 O_LIBS=""
+O_DIRS=""
 
 MAX_LEN="${#NAME}"
 
@@ -100,7 +101,8 @@ function create_c_rule()
 	O_FILE=`echo "$1.o" | sed -E 's#^'"$C_DIR"'#'"$O_DIR"'#'`
 	O_FILES="$O_FILES $O_FILE"
 	printf "$O_FILE: $1"
-	echo " $O_FILE" | sed -E 's#[^/]+$##' | tr -d '\n'
+	#echo " $O_FILE" | sed -E 's#[^/]+$##' | tr -d '\n'
+	O_DIRS="$O_DIRS `echo "$O_FILE" | sed -E 's#[^/]+$##' | tr -d '\n'`"
 	includes "$1"
 	echo
 	echo "	@printf \$(MSG_0) \$<"
@@ -129,10 +131,10 @@ all: \$(NAME)
 		echo
 	done
 
-	echo "MSG_0 = '\r\033[0;32m%-${MAX_LEN}.${MAX_LEN}s\033[0;0m\r'
-MSG_1 = '\r\033[0;31m%-${MAX_LEN}.${MAX_LEN}s\033[0;0m\n'
+	echo "MSG_0 = '"'\\'"033[0;32m%-${MAX_LEN}.${MAX_LEN}s"'\\'"033[0;0m"'\\'"r'
+MSG_1 = '"'\\'"033[0;31m%-${MAX_LEN}.${MAX_LEN}s"'\\'"033[0;0m"'\\'"n'
 
-\$(NAME):$O_LIBS$O_FILES
+\$(NAME):$O_DIRS$O_LIBS$O_FILES
 	@printf \$(MSG_0) \$@
 	@$CC $FLAGS -o \$@ $O_FILES $LINKS && echo || printf \$(MSG_1) \$@
 

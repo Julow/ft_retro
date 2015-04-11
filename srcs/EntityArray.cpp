@@ -6,14 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:07:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:59:56 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "EntityArray.hpp"
 
 EntityArray::EntityArray(void)
-	: _ents(NULL)
+	: _ents(NULL), _count(0)
 {
 }
 
@@ -31,7 +31,7 @@ EntityArray::~EntityArray(void)
 
 AEntity				*EntityArray::get(int i) const
 {
-	if (i < 0 || i >= _count)
+	if (i < 0 || i >= _count || _ents == NULL)
 		return (NULL);
 	return (_ents[i]);
 }
@@ -58,7 +58,7 @@ AEntity				*EntityArray::rem(int i)
 {
 	AEntity				*tmp;
 
-	if (i < 0 || i >= _count)
+	if (i < 0 || i >= _count || _ents == NULL)
 		return (NULL);
 	tmp = _ents[i];
 	for (i++; i < _count; i++)
@@ -71,10 +71,12 @@ void				EntityArray::updateAll(float t) const
 {
 	int					i;
 
+	if (_ents == NULL)
+		return ;
 	for (i = 0; i < _count; i++)
 	{
 		if (_ents[i] != NULL)
-			_ents[i].update(t);
+			_ents[i]->update(t);
 	}
 }
 
@@ -85,7 +87,7 @@ void				EntityArray::renderAll(void) const
 	for (i = 0; i < _count; i++)
 	{
 		if (_ents[i] != NULL)
-			_ents[i].render();
+			_ents[i]->render();
 	}
 }
 

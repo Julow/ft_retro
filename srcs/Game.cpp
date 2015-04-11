@@ -6,14 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:59:15 by olysogub         ###   ########.fr       */
+/*   Updated: 2015/04/11 18:52:19 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
 
 Game::Game(void)
-	: _ents(), _projectiles(), _player(0, 0), _score(0)
+	: _ents(), _projectiles(), _player(*this, 0, 0), _score(0)
 {
 	this->_tbegin = std::time(0);
 }
@@ -26,7 +26,6 @@ void				Game::start(void)
 {
 	clock_t				last_update;
 	float				t;
-	int					key;
 
 	last_update = clock();
 	while (true)
@@ -40,17 +39,17 @@ void				Game::start(void)
 
 EntityArray			&Game::getEntities(void)
 {
-	return (_ents)
+	return (_ents);
 }
 
 EntityArray			&Game::getProjectiles(void)
 {
-	return (_projectiles)
+	return (_projectiles);
 }
 
 PlayerEntity		&Game::getPlayer(void)
 {
-	return (_player)
+	return (_player);
 }
 
 t_pt				Game::getOffset(void) const
@@ -72,13 +71,13 @@ void				Game::_updateOffset(void)
 void				Game::_handleKey(int key)
 {
 	if (key == KEY_UP)
-		_player.move(1, 0);
+		_player.moveToDirection(1, 0);
 	else if (key == KEY_RIGHT)
-		_player.move(0, 1);
+		_player.moveToDirection(0, 1);
 	else if (key == KEY_DOWN)
-		_player.move(-1, 0);
+		_player.moveToDirection(-1, 0);
 	else if (key == KEY_LEFT)
-		_player.move(0, -1);
+		_player.moveToDirection(0, -1);
 	else
 		_updateOffset();
 }
@@ -107,15 +106,15 @@ void				Game::_printBorder(void)
 	int					y;
 
 	attron(COLOR_PAIR(1));
-	y = this->_offset().y - 1;
-	x = this->_offset().x - 1;
+	y = _offset.y - 1;
+	x = _offset.x - 1;
 	while (y < GAME_HEIGHT)
 	{
 		while (x < GAME_WIDTH)
 		{
-			if (y == (this->_offset().y - 1) || (y == (this->_offset().y + GAME_HEIGHT - 2)))
+			if (y == (_offset.y - 1) || (y == (_offset.y + GAME_HEIGHT - 2)))
 				printw("=");
-			else if (x == (this->_offset().x - 1) || (x == (this->_offset().x + GAME_WIDTH - 2)))
+			else if (x == (_offset.x - 1) || (x == (_offset.x + GAME_WIDTH - 2)))
 				printw("|");
 			else
 				printw(" ");
@@ -128,10 +127,10 @@ void				Game::_printBorder(void)
 
 void				Game::_printGameInfo(void)
 {
-	std:ostringstream		oss;
+	std::ostringstream	oss;
 
 	attron(COLOR_PAIR(2));
-	move(_offset().y - 6, _offset().x);
+	move(_offset.y - 6, _offset.x);
 	printw("Score: ");
 	oss << this->_score;
 	printw(oss.str().c_str());
@@ -139,16 +138,9 @@ void				Game::_printGameInfo(void)
 	printw("Time: ");
 	oss.str("");
 	oss.clear();
-	oss << _getGameTime() << " sec";
+	oss << (time(NULL) - _tbegin) << " sec";
 	printw(oss.str().c_str());
 	printw("\t\t");
 	printw("Lifes: ");
 	printw("<3 <3 <3");
-	return ;
-}
-
-
-double				Game::_getGameTime(void)
-{
-	return (difftime(time(0), this->_tbegin);
 }
