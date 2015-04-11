@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 16:58:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:44:40 by olysogub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_retro.hpp"
 # include "AEntity.hpp"
 # include <time.h>
+# include <sstream>
 
 class	Game
 {
@@ -34,6 +35,8 @@ protected:
 	void			_handleKey(int key);
 	void			_update(float t);
 	void			_render(void);
+	void			_printBorder(void);
+	int				_score;
 
 private:
 	Game(Game const &src);
