@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:10:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 13:30:51 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 16:57:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 # include <ncurses.h>
 
 # ifndef NULL
-#  define NULL		((void*)0)
+#  define NULL			((void*)0)
 # endif
+
+# define GAME_WIDTH		500
+# define GAME_HEIGHT	300
 
 class	HitBox;
 class	AEntity;

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 15:47:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:07:41 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,25 @@ AEntity				*EntityArray::rem(int i)
 	return (tmp);
 }
 
-void				EntityArray::updateAll(void) const
+void				EntityArray::updateAll(float t) const
 {
 	int					i;
 
 	for (i = 0; i < _count; i++)
 	{
 		if (_ents[i] != NULL)
-			_ents[i].update();
+			_ents[i].update(t);
+	}
+}
+
+void				EntityArray::renderAll(void) const
+{
+	int					i;
+
+	for (i = 0; i < _count; i++)
+	{
+		if (_ents[i] != NULL)
+			_ents[i].render();
 	}
 }
 

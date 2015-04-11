@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:11:28 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 16:12:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:11:21 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ HitBox::~HitBox(void)
 {
 }
 
-HitBox			&HitBox:operator=(HitBox const &rhs)
+bool			HitBox::collide(HitBox const &box)
+{
+	return (false);
+}
+
+HitBox			&HitBox::operator=(HitBox const &rhs)
 {
 	_x = rhs._x;
 	_y = rhs._y;

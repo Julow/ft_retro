@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 15:59:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 16:58:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "ft_retro.hpp"
 # include "AEntity.hpp"
+# include <time.h>
 
 class	Game
 {
@@ -30,8 +31,8 @@ protected:
 
 	PlayerEntity	_player;
 
-	void			_update(void);
-
+	void			_handleKey(int key);
+	void			_update(float t);
 	void			_render(void);
 
 private:
