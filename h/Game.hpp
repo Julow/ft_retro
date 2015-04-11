@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 17:44:40 by olysogub         ###   ########.fr       */
+/*   Updated: 2015/04/11 17:58:26 by olysogub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "AEntity.hpp"
 # include <time.h>
 # include <sstream>
+# include <ctime>
 
 class	Game
 {
@@ -37,6 +38,9 @@ protected:
 	void			_render(void);
 	void			_printBorder(void);
 	int				_score;
+	time_t			_tbegin;
+
+	double			_getGameTime(void);
 
 private:
 	Game(Game const &src);
