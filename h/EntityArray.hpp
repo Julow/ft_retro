@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:38:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 13:40:44 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 15:44:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ public:
 
 	AEntity				*get(int i) const;
 	void				add(AEntity *ent);
+	AEntity				*rem(int i);
 
-	int					size(void) const;
+	int					count(void) const;
+
+	void				updateAll(void) const;
 
 	EntityArray			&operator=(EntityArray const &rhs);
 

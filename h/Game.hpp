@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 13:57:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/11 15:59:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ class	Game
 {
 public:
 	Game(void);
-	Game(Game const &src);
 	virtual ~Game(void);
 
 	void			start(void);
-
-	Game			&operator=(Game const &rhs);
 
 protected:
 	EntityArray		_ents;
@@ -33,12 +30,14 @@ protected:
 
 	PlayerEntity	_player;
 
-	void			_updateEntity(void);
-	void			_updateGame(void);
+	void			_update(void);
 
 	void			_render(void);
 
 private:
+	Game(Game const &src);
+
+	Game			&operator=(Game const &rhs);
 };
 
 #endif

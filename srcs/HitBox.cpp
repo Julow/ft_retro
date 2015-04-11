@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HitBox.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/11 13:10:22 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 15:44:05 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/04/11 16:11:28 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/04/11 16:12:41 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_retro.hpp"
+#include "HitBox.hpp"
 
-int				main(void)
+HitBox::HitBox(int x, int y, int width, int height)
+	: _x(x), _y(y), _width(width), _height(height)
 {
-	Game			game;
+}
 
-	initscr();
-	noecho();
-	keypad(stdscr, TRUE);
-	game.start();
-	endwin();
-	return (0);
+HitBox::HitBox(HitBox const &src)
+{
+	*this = src;
+}
+
+HitBox::~HitBox(void)
+{
+}
+
+HitBox			&HitBox:operator=(HitBox const &rhs)
+{
+	_x = rhs._x;
+	_y = rhs._y;
+	_width = rhs._width;
+	_height = rhs._height;
+	return (*this);
 }
