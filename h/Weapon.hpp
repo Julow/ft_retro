@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:25:54 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:56:08 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 12:24:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@
 class	Weapon
 {
 public:
-	Weapon(Game &game, int dmg);
+	Weapon(int dmg, int interval);
 	virtual ~Weapon(void);
 
 	int				getDmg(void) const;
+	bool			canShoot(float t, AEntity &owner);
 
 	Projectile		*createProjectile(AEntity &owner);
 
 protected:
-	Game			&_game;
-
 	int				_dmg;
+	int				_shootInterval;
+	float			_shootTimeout;
 
 private:
 	Weapon(void);

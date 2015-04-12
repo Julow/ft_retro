@@ -6,14 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:05:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:55:51 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 12:25:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AEntity.hpp"
 
-AEntity::AEntity(Game &game, AEntity::e_type type, int x, int y, int w, int h)
-	: HitBox(x, y, w, h), _game(game), _type(type)
+AEntity::AEntity(Game &game, AEntity::e_type type, std::string const &pattern, int x, int y, int w, int h, int hp)
+	: HitBox(x, y, w, h), _game(game), _pattern(pattern), _type(type), _hp(hp)
 {
 }
 
@@ -21,9 +21,26 @@ AEntity::~AEntity(void)
 {
 }
 
+Game				&AEntity::getGame(void) const
+{
+	return (_game);
+}
+
 AEntity::e_type		AEntity::getType(void) const
 {
 	return (_type);
+}
+
+int					AEntity::getHP(void) const
+{
+	return (_hp);
+}
+
+void				AEntity::render(void)
+{
+	attron(COLOR_PAIR(3));
+	wmove(stdscr, _y, _x);
+	printw(_pattern.c_str());
 }
 
 bool				AEntity::moveToDirection(int x, int y)
