@@ -28,7 +28,7 @@ EnnemiEntity::~EnnemiEntity(void)
 
 void					EnnemiEntity::update(float t)
 {
-	moveToDirection(-(t * _moveSpeed), 0);
+	moveToDirection(0, (t * _moveSpeed));
 	_weapon->canShoot(t, *this);
 }
 

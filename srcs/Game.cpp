@@ -80,7 +80,6 @@ void				Game::_updateOffset(void)
 	_offset.y = 10;
 }
 
-#include <stdio.h>
 void				Game::_handleKey(int key)
 {
 	if (key == KEY_DOWN)
