@@ -19,8 +19,8 @@
 #  define NULL			((void*)0)
 # endif
 
-# define GAME_WIDTH		500
-# define GAME_HEIGHT	300
+# define GAME_WIDTH		100
+# define GAME_HEIGHT	50
 
 typedef struct	s_pt
 {

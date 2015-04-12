@@ -16,6 +16,7 @@ Game::Game(void)
 	: _ents(), _projectiles(), _player(*this, 0, 0), _score(0)
 {
 	this->_tbegin = std::time(0);
+	_updateOffset();
 }
 
 Game::~Game(void)
@@ -66,6 +67,8 @@ void				Game::_updateOffset(void)
 		return ;
 	_offset.x = (GAME_WIDTH - pt.x) / 2;
 	_offset.y = (GAME_HEIGHT - pt.y) / 2;
+	_offset.x = 10;
+	_offset.y = 10;
 }
 
 void				Game::_handleKey(int key)
@@ -93,9 +96,9 @@ void				Game::_render(void)
 {
 	clear();
 	_printBorder(); // Prints the game border
-	_ents.renderAll();
-	_player.render();
-	_projectiles.renderAll();
+	// _ents.renderAll();
+	// _player.render();
+	// _projectiles.renderAll();
 	refresh();
 }
 
@@ -108,19 +111,23 @@ void				Game::_printBorder(void)
 	attron(COLOR_PAIR(1));
 	y = _offset.y - 1;
 	x = _offset.x - 1;
-	while (y < GAME_HEIGHT)
+	while (y < (GAME_HEIGHT + _offset.y))
 	{
-		while (x < GAME_WIDTH)
+		x = _offset.x - 1;
+		while (x < (GAME_WIDTH + _offset.x))
 		{
-			if (y == (_offset.y - 1) || (y == (_offset.y + GAME_HEIGHT - 2)))
+			if (y == (_offset.y - 1) || (y == (_offset.y + GAME_HEIGHT - 1)))
+			{
+				wmove(stdscr, y, x);
 				printw("=");
-			else if (x == (_offset.x - 1) || (x == (_offset.x + GAME_WIDTH - 2)))
+			}
+			else if (x == (_offset.x - 1) || (x == (_offset.x + GAME_WIDTH - 1)))
+			{
+				wmove(stdscr, y, x);
 				printw("|");
-			else
-				printw(" ");
+			}
 			x++;
 		}
-		printw("\n");
 		y++;
 	}
 }
