@@ -43,8 +43,13 @@ void				Projectile::update(float t)
 
 void				Projectile::render(void)
 {
+	if (_ownType == ENNEMI)
+		attron(COLOR_PAIR(3));
+	else
+		attron(COLOR_PAIR(7));
+
 	_game.wmove(_x, _y);
-	printw("|");
+	printw(" ");
 }
 
 int					Projectile::getDmg(void) const

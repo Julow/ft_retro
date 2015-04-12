@@ -17,7 +17,7 @@ EnnemiEntity::s_bad		EnnemiEntity::monsters[] = {
 	{"Shit", "==\n**", 2, 2, 100, 10, new Weapon(20, 5)},
 	{"Snake", "(\n)\n(\n)\n0", 1, 5, 100, 10, new Weapon(20, 5)},
 	{"", "", 0, 0, 0, 0, NULL}
-}
+};
 
 EnnemiEntity::EnnemiEntity(Game &g, std::string const &p, int x, int y, int width, int h, int s, int hp, Weapon *w)
 	: AEntity(g, ENNEMI, p, x, y, width, h, hp), _weapon(w), _pattern(p), _rest(0), _moveSpeed(s)
