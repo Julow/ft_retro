@@ -54,6 +54,7 @@ protected:
 	int				_score;
 	time_t			_tbegin;
 	int				_level;
+	bool			isGameover();
 
 	double			_getGameTime(void);
 

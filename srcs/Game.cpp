@@ -37,7 +37,10 @@ void				Game::start(void)
 		_handleKey(getch());
 		t = (float)(clock() - last_update) / CLOCKS_PER_SEC;
 		_update(t);
-		_render();
+		if (this->isGameover())
+			break ;
+		else
+			_render();
 	}
 }
 
@@ -182,6 +185,30 @@ void				Game::_printBorder(void)
 		}
 		y++;
 	}
+}
+
+bool				Game::isGameover()
+{
+	const char *over = "_____                                             \n\
+	  / ____|                                            \n\
+	 | |  __  __ _ _ __ ___   ___    _____   _____ _ __  \n\
+	 | | |_ |/ _` | '_ ` _ \\ / _ \\  / _ \\ \\ / / _ \\ '__| \n\
+	 | |__| | (_| | | | | | |  __/ | (_) \\ V /  __/ |    \n\
+	  \\_____|\\__,_|_| |_| |_|\\___|  \\___/ \\_/ \\___|_|    ";
+
+	
+	if (this->_player->getHP() <= 0)
+	{
+		erase();
+		attron(COLOR_PAIR(2));
+		this->wmove(this->_offset.x, this->_offset.y);
+		printw(over);
+		refresh();
+		timeout(-1);
+		getch();
+		return (true);
+	}
+	return (false);
 }
 
 void				Game::_printGameInfo(void)
