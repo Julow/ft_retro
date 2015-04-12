@@ -35,6 +35,7 @@ protected:
 	AEntity::e_type		_ownType;
 
 	int					_dmg;
+	float				_rest;
 
 private:
 	Projectile(void);

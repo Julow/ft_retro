@@ -49,6 +49,7 @@ protected:
 	Weapon				*_weapon;
 	std::string			_pattern;
 
+	float					_rest;
 	float				_moveSpeed;
 
 private:

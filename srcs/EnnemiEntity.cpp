@@ -18,7 +18,7 @@ const EnnemiEntity::s_ennemi	g_ennemies[] = {
 };
 
 EnnemiEntity::EnnemiEntity(Game &g, std::string const &p, int x, int y, int width, int h, int s, int hp, Weapon *w)
-	: AEntity(g, ENNEMI, p, x, y, width, h, hp), _weapon(w), _pattern(p), _moveSpeed(s)
+	: AEntity(g, ENNEMI, p, x, y, width, h, hp), _weapon(w), _pattern(p), _rest(0), _moveSpeed(s)
 {
 }
 
@@ -28,9 +28,13 @@ EnnemiEntity::~EnnemiEntity(void)
 
 void					EnnemiEntity::update(float t)
 {
-	moveToDirection(0, (t * _moveSpeed));
+	_rest += t * _moveSpeed;
+	while (_rest >= 1)
+	{
+		moveToDirection(0, 1);
+		_rest--;
+	}
 	_weapon->canShoot(t, *this);
-	// moveToDirection(0, 1);
 	if (_y > GAME_HEIGHT)
 		_hp = 0;
 }

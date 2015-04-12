@@ -13,7 +13,7 @@
 #include "Projectile.hpp"
 
 Projectile::Projectile(Game &game, AEntity::e_type ownType, int x, int y, int dmg)
-	: AEntity(game, PROJECTILE, "o", x, y, 1, 1, 1), _ownType(ownType), _dmg(dmg)
+	: AEntity(game, PROJECTILE, "o", x, y, 1, 1, 1), _ownType(ownType), _dmg(dmg), _rest(0)
 {
 }
 
@@ -28,7 +28,12 @@ AEntity::e_type		Projectile::getOwnerType(void) const
 
 void				Projectile::update(float t)
 {
-	moveToDirection(0, 25 * t * ((_ownType == AEntity::PLAYER) ? -1 : 1));
+	_rest += t * 40;
+	while (_rest >= 1)
+	{
+		moveToDirection(0, ((_ownType == AEntity::PLAYER) ? -1 : 1));
+		_rest--;
+	}
 	if (_y < 0 || _y >= GAME_HEIGHT)
 	{
 		_hp = 0;
