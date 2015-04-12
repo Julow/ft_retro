@@ -6,7 +6,7 @@
 /*   By: olysogub <olysogub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:36:40 by olysogub          #+#    #+#             */
-/*   Updated: 2015/04/12 12:18:29 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 14:46:24 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 PlayerEntity::PlayerEntity(Game &game, int x, int y)
 	: AEntity(game, PLAYER, "==^==\n-|-|-", x, y, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HP)
 {
-	_weapon = new Weapon(5, 1);
+	_weapon = new Weapon(5, 0);
 }
 
 PlayerEntity::~PlayerEntity(void)
 {
 	delete _weapon;
+}
+
+Weapon						&PlayerEntity::getWeapon(void) const
+{
+	return (*_weapon);
 }
 
 void						PlayerEntity::update(float t)
@@ -33,11 +38,10 @@ void						PlayerEntity::render(void)
 {
 	int					i;
 	int					bing;
-	char	 const		*str;
+	char const			*str;
 
-	// /!\ Remplacer les 10 par les offsets
 	bing = 0;
-	wmove(stdscr, this->_y + _game.getOffset().y , this->_x + _game.getOffset().x);
+	_game.wmove(_x, _y);
 	i = 0;
 	str = this->_pattern.c_str();
 	while (str[i] != '\0')
@@ -45,7 +49,7 @@ void						PlayerEntity::render(void)
 		if (str[i] == '\n')
 		{
 			bing++;
-			wmove(stdscr, this->_y + bing + _game.getOffset().y, this->_x + _game.getOffset().x);
+			_game.wmove(_x, _y + bing);
 		}
 		else
 			addch(str[i]);

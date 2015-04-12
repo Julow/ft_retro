@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:59:56 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 14:52:22 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void				EntityArray::add(AEntity *ent)
 	tmp[i] = ent;
 	delete [] _ents;
 	_ents = tmp;
+	_count++;
 }
 
 AEntity				*EntityArray::rem(int i)

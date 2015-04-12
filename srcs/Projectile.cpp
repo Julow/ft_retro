@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:07 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:10:29 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 14:54:28 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ AEntity::e_type		Projectile::getOwnerType(void) const
 
 void				Projectile::update(float t)
 {
-	moveToDirection(0, 50 * t);
+	moveToDirection(0, -50 * t);
 }
 
 void				Projectile::render(void)
 {
-	wmove(stdscr, _x, _y);
-	printw("-");
+	_game.wmove(_x, _y);
+	printw("|");
 }
 
 int					Projectile::getDmg(void) const

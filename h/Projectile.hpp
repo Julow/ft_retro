@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:30 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:56:16 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 14:47:54 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "ft_retro.hpp"
 # include "AEntity.hpp"
+# include "Game.hpp"
 
 class	Projectile : public AEntity
 {

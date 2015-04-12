@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:52:19 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 14:52:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 #include <chrono>
 
 Game::Game(void)
-	: _ents(), _projectiles() , _player(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT)), _score(0)
+	: _ents(), _projectiles(), _spawnTimeout(5), _score(0)
 {
-	this->_tbegin = std::time(0);
+	_tbegin = std::time(0);
+	_player = new PlayerEntity(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT));
 	_updateOffset();
 }
 
@@ -35,10 +36,11 @@ void				Game::start(void)
 	while (true)
 	{
 		_handleKey(getch());
-		t = (clock() - last_update) / CLOCKS_PER_SEC;
+		t = (float)(clock() - last_update) / CLOCKS_PER_SEC;
+	#include <stdio.h>
+	dprintf(3, "%f\n", t);
 		_update(t);
 		_render();
-		// std::this_thread::sleep_for (std::chrono::microseconds(50));
 	}
 }
 
@@ -54,12 +56,17 @@ EntityArray			&Game::getProjectiles(void)
 
 PlayerEntity		&Game::getPlayer(void)
 {
-	return (_player);
+	return (*_player);
 }
 
 t_pt				Game::getOffset(void) const
 {
 	return (_offset);
+}
+
+void				Game::wmove(int x, int y) const
+{
+	::wmove(stdscr, y + _offset.y, x + _offset.x);
 }
 
 void				Game::_updateOffset(void)
@@ -69,26 +76,25 @@ void				Game::_updateOffset(void)
 	getmaxyx(stdscr, pt.x, pt.y);
 	if (pt.x == _offset.x || pt.y == _offset.y)
 		return ;
-	_offset.x = (GAME_WIDTH - pt.x) / 2;
-	_offset.y = (GAME_HEIGHT - pt.y) / 2;
+	_offset.x = (pt.x - GAME_WIDTH) / 2;
+	_offset.y = (pt.y - GAME_HEIGHT) / 2;
 	_offset.x = 10;
 	_offset.y = 10;
 }
 
+#include <stdio.h>
 void				Game::_handleKey(int key)
 {
 	if (key == KEY_DOWN)
-		_player.moveToDirection(0, 1);
+		_player->moveToDirection(0, 1);
 	else if (key == KEY_UP)
-		_player.moveToDirection(0, -1);
+		_player->moveToDirection(0, -1);
 	else if (key == KEY_RIGHT)
-		_player.moveToDirection(1, 0);
+		_player->moveToDirection(1, 0);
 	else if (key == KEY_LEFT)
-		_player.moveToDirection(-1, 0);
+		_player->moveToDirection(-1, 0);
 	else if (key == ' ')
-	{
-		printw("Shoot here !");
-	}
+		_player->getWeapon().canShoot(0, *_player);
 	else
 		_updateOffset();
 }
@@ -97,21 +103,20 @@ void				Game::_update(float t)
 {
 	// EnnemiEntity::spawn("Fly", 50,50);
 	_ents.updateAll(t);
-	_player.update(t);
+	_player->update(t);
 	_projectiles.updateAll(t);
 }
 
 void				Game::_render(void)
 {
 	clear();
-	_printBorder(); // Prints the game border
+	_printBorder();
 	_printGameInfo();
 	_ents.renderAll();
-	_player.render();
+	_player->render();
 	_projectiles.renderAll();
 	refresh();
 }
-
 
 void				Game::_printBorder(void)
 {
@@ -129,12 +134,12 @@ void				Game::_printBorder(void)
 		{
 			if (y == (_offset.y - 1) || (y == (_offset.y + GAME_HEIGHT - 1)))
 			{
-				wmove(stdscr, y, x);
+				::wmove(stdscr, y, x);
 				printw(" ");
 			}
 			else if (x == (_offset.x - 1) || (x == (_offset.x + GAME_WIDTH - 1)))
 			{
-				wmove(stdscr, y, x);
+				::wmove(stdscr, y, x);
 				printw(" ");
 			}
 			x++;
@@ -159,13 +164,9 @@ void				Game::_printGameInfo(void)
 	attron(COLOR_PAIR(4));
 	printw("\t\t\tLifes: ");
 	attron(COLOR_PAIR(2));
-	i = 0;
-	// /!\ Replace 3 with the number of hp
-	while (i < this->_player.getHP())
-	{
+	i = this->_player->getHP() / 20;
+	while (i-- > 0)
 		printw("<3 ");
-		i++;
-	}
 	attron(COLOR_PAIR(0));
 }
 
