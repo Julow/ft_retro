@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:11:28 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:28:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:57:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int				HitBox::getHeight(void) const
 
 bool			HitBox::collide(HitBox const &box) const
 {
-	(void)box;
+	if (_x <= (box._x + box._width)
+		&& box._x <= (_x + _width)
+		&& _y <= (box._y + box._height)
+		&& box._y <= (_y + _height))
+		return (true);
 	return (false);
 }
