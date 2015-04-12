@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "PlayerEntity.hpp"
+#include "Game.hpp"
 
 PlayerEntity::PlayerEntity(Game &game, int x, int y)
-	: AEntity(game, PLAYER, "--O--\n=^=^=", x, y, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HP)
+	: AEntity(game, PLAYER, "==^==\n-|-|-", x, y, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HP)
 {
 	_weapon = new Weapon(5, 1);
 }
