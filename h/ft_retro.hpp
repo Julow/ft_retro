@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:10:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:14:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 12:15:33 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class	Game;
 class	Weapon;
 class	EntityArray;
 class	Projectile;
+class	EnnemiEntity;
 
 void					initColors(void);
 

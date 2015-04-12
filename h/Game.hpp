@@ -16,6 +16,7 @@
 # include "ft_retro.hpp"
 # include "PlayerEntity.hpp"
 # include "EntityArray.hpp"
+# include "EnnemiEntity.hpp"
 # include <sstream>
 # include <ctime>
 

@@ -6,14 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:07 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:57:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 12:10:29 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Projectile.hpp"
 
 Projectile::Projectile(Game &game, AEntity::e_type ownType, int x, int y, int dmg)
-	: AEntity(game, PROJECTILE, x, y, 1, 1), _ownType(ownType), _dmg(dmg)
+	: AEntity(game, PROJECTILE, "o", x, y, 1, 1, 1), _ownType(ownType), _dmg(dmg)
 {
 }
 

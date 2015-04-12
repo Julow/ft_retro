@@ -88,6 +88,7 @@ void				Game::_handleKey(int key)
 
 void				Game::_update(float t)
 {
+	// EnnemiEntity::spawn("Fly", 50,50);
 	_ents.updateAll(t);
 	_player.update(t);
 	_projectiles.updateAll(t);
