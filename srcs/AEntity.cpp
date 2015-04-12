@@ -43,6 +43,11 @@ void				AEntity::render(void)
 	printw(_pattern.c_str());
 }
 
+std::string			AEntity::getPattern(void) const
+{
+	return (this->_pattern);
+}
+
 bool				AEntity::moveToDirection(int x, int y)
 {
 	int			nx;
@@ -54,7 +59,7 @@ bool				AEntity::moveToDirection(int x, int y)
 	if (nx >= 0 && ny >= 0)
 	{
 		if (((nx + this->_width) < GAME_WIDTH) &&
-			((nx + this->_height) < GAME_HEIGHT))
+			((ny + this->_height) < GAME_HEIGHT))
 		{
 			this->_x = nx;
 			this->_y = ny;

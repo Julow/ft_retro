@@ -33,6 +33,7 @@ public:
 	Game				&getGame(void) const;
 	e_type				getType(void) const;
 	int					getHP(void) const;
+	std::string			getPattern(void) const;
 
 	virtual void		update(float t) = 0;
 	virtual void		render(void);

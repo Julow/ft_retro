@@ -18,6 +18,10 @@
 # include "Weapon.hpp"
 # include <iostream>
 
+# define PLAYER_WIDTH 5
+# define PLAYER_HEIGHT 2
+# define PLAYER_HP 3
+
 class	PlayerEntity : public AEntity
 {
 public:

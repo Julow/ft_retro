@@ -13,7 +13,7 @@
 #include "PlayerEntity.hpp"
 
 PlayerEntity::PlayerEntity(Game &game, int x, int y)
-	: AEntity(game, PLAYER, "  |\n--O--\n ___", x, y, 5, 3, 100)
+	: AEntity(game, PLAYER, "--O--\n=^=^=", x, y, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HP)
 {
 	_weapon = new Weapon(5, 1);
 }
@@ -30,4 +30,24 @@ void						PlayerEntity::update(float t)
 
 void						PlayerEntity::render(void)
 {
+	int					i;
+	int					bing;
+	char	 const		*str;
+
+	// /!\ Remplacer les 10 par les offsets
+	bing = 0;
+	wmove(stdscr, this->_y + _game.getOffset().y , this->_x + _game.getOffset().x);
+	i = 0;
+	str = this->_pattern.c_str();
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			bing++;
+			wmove(stdscr, this->_y + bing + _game.getOffset().y, this->_x + _game.getOffset().x);
+		}
+		else
+			addch(str[i]);
+		i++;
+	}
 }

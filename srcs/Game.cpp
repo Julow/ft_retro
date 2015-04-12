@@ -13,7 +13,7 @@
 #include "Game.hpp"
 
 Game::Game(void)
-	: _ents(), _projectiles(), _player(*this, 0, 0), _score(0)
+	: _ents(), _projectiles() , _player(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT)), _score(0)
 {
 	this->_tbegin = std::time(0);
 	_updateOffset();
@@ -74,14 +74,14 @@ void				Game::_updateOffset(void)
 
 void				Game::_handleKey(int key)
 {
-	if (key == KEY_UP)
-		_player.moveToDirection(1, 0);
-	else if (key == KEY_RIGHT)
+	if (key == KEY_DOWN)
 		_player.moveToDirection(0, 1);
-	else if (key == KEY_DOWN)
-		_player.moveToDirection(-1, 0);
-	else if (key == KEY_LEFT)
+	else if (key == KEY_UP)
 		_player.moveToDirection(0, -1);
+	else if (key == KEY_RIGHT)
+		_player.moveToDirection(1, 0);
+	else if (key == KEY_LEFT)
+		_player.moveToDirection(-1, 0);
 	else
 		_updateOffset();
 }
@@ -154,7 +154,7 @@ void				Game::_printGameInfo(void)
 	attron(COLOR_PAIR(2));
 	i = 0;
 	// /!\ Replace 3 with the number of hp
-	while (i < 3)
+	while (i < this->_player.getHP())
 	{
 		printw("<3 ");
 		i++;
