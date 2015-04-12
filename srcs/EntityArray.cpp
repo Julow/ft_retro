@@ -6,19 +6,20 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 14:52:22 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:51:29 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "EntityArray.hpp"
+#include "Game.hpp"
 
 EntityArray::EntityArray(void)
-	: _ents(NULL), _count(0)
+	: _ents(NULL), _count(0), _alloc(0)
 {
 }
 
 EntityArray::EntityArray(EntityArray const &src)
-	: _ents(NULL)
+	: _ents(NULL), _count(0), _alloc(0)
 {
 	*this = src;
 }
@@ -31,7 +32,7 @@ EntityArray::~EntityArray(void)
 
 AEntity				*EntityArray::get(int i) const
 {
-	if (i < 0 || i >= _count || _ents == NULL)
+	if (i < 0 || i >= _count)
 		return (NULL);
 	return (_ents[i]);
 }
@@ -43,15 +44,8 @@ int					EntityArray::count(void) const
 
 void				EntityArray::add(AEntity *ent)
 {
-	AEntity				**tmp;
-	int					i;
-
-	tmp = new AEntity*[_count + 1];
-	for (i = 0; i < _count; i++)
-		tmp[i] = _ents[i];
-	tmp[i] = ent;
-	delete [] _ents;
-	_ents = tmp;
+	_extend();
+	_ents[_count] = ent;
 	_count++;
 }
 
@@ -59,8 +53,7 @@ AEntity				*EntityArray::rem(int i)
 {
 	AEntity				*tmp;
 
-	if (i < 0 || i >= _count || _ents == NULL)
-		return (NULL);
+	if (i < 0 || i >= _count)
 	tmp = _ents[i];
 	for (i++; i < _count; i++)
 		_ents[i - 1] = _ents[i];
@@ -68,16 +61,37 @@ AEntity				*EntityArray::rem(int i)
 	return (tmp);
 }
 
-void				EntityArray::updateAll(float t) const
+AEntity				*EntityArray::collideAll(AEntity &ent, AEntity::e_type ownType)
 {
 	int					i;
 
-	if (_ents == NULL)
-		return ;
+	for (i = 0; i < _count; i++)
+	{
+		if (_ents[i]->getType() != ownType && ent.collide(*_ents[i]))
+			return (_ents[i]);
+	}
+	return (NULL);
+}
+
+void				EntityArray::updateAll(float t)
+{
+	int					i;
+	Projectile			*tmp;
+
 	for (i = 0; i < _count; i++)
 	{
 		if (_ents[i] != NULL)
+		{
+			tmp = (Projectile*)(&_ents[i]->getGame())->getProjectiles().collideAll(*_ents[i], _ents[i]->getType());
+			if (tmp != NULL)
+				_ents[i]->damage(tmp->getDmg());
 			_ents[i]->update(t);
+			if (_ents[i]->getHP() <= 0)
+			{
+				rem(i);
+				i--;
+			}
+		}
 	}
 }
 
@@ -90,6 +104,24 @@ void				EntityArray::renderAll(void) const
 		if (_ents[i] != NULL)
 			_ents[i]->render();
 	}
+}
+
+void				EntityArray::_extend(void)
+{
+	AEntity				**tmp;
+	int					len;
+
+	len = _alloc;
+	while (_count >= len)
+		len += EXTEND_CHUNK;
+	if (_alloc == len)
+		return ;
+	tmp = new AEntity*[len];
+	_alloc = len;
+	for (len = 0; len < _count; len++)
+		tmp[len] = _ents[len];
+	delete [] _ents;
+	_ents = tmp;
 }
 
 EntityArray			&EntityArray::operator=(EntityArray const &rhs)

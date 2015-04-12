@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 14:52:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:41:09 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void				Game::start(void)
 	{
 		_handleKey(getch());
 		t = (float)(clock() - last_update) / CLOCKS_PER_SEC;
-	#include <stdio.h>
-	dprintf(3, "%f\n", t);
 		_update(t);
 		_render();
 	}
@@ -101,7 +99,14 @@ void				Game::_handleKey(int key)
 
 void				Game::_update(float t)
 {
-	// EnnemiEntity::spawn("Fly", 50,50);
+	AEntity				*ent;
+
+	ent = _ents.collideAll(*_player, _player->getType());
+	if (ent != NULL)
+		_player->damage(_player->getHP());
+	ent = _projectiles.collideAll(*_player, _player->getType());
+	if (ent != NULL)
+		_player->damage(((Projectile*)ent)->getDmg());
 	_ents.updateAll(t);
 	_player->update(t);
 	_projectiles.updateAll(t);

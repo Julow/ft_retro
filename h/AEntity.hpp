@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:22:35 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:17:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:35:19 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ public:
 	e_type				getType(void) const;
 	int					getHP(void) const;
 	std::string			getPattern(void) const;
+
+	virtual void		damage(int dmg);
 
 	virtual void		update(float t) = 0;
 	virtual void		render(void);

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:05:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:25:08 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:35:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int					AEntity::getHP(void) const
 	return (_hp);
 }
 
+void				AEntity::damage(int dmg)
+{
+	_hp -= dmg;
+}
+
 void				AEntity::render(void)
 {
 	attron(COLOR_PAIR(3));
@@ -50,21 +55,7 @@ std::string			AEntity::getPattern(void) const
 
 bool				AEntity::moveToDirection(int x, int y)
 {
-	int			nx;
-	int			ny;
-
-	// Checking if the player wont go out of the screen
-	nx = this->_x + x;
-	ny = this->_y + y;
-	if (nx >= 0 && ny >= 0)
-	{
-		if (((nx + this->_width) < GAME_WIDTH) &&
-			((ny + this->_height) < GAME_HEIGHT))
-		{
-			this->_x = nx;
-			this->_y = ny;
-			return (true);
-		}
-	}
-	return (false);
+	_x += x;
+	_y += y;
+	return (true);
 }

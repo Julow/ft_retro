@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:38:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:32:42 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:47:27 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "ft_retro.hpp"
 # include "AEntity.hpp"
+
+# define EXTEND_CHUNK	32
 
 class	EntityArray
 {
@@ -29,7 +31,9 @@ public:
 
 	int					count(void) const;
 
-	void				updateAll(float t) const;
+	AEntity				*collideAll(AEntity &ent, AEntity::e_type ownType);
+
+	void				updateAll(float t);
 	void				renderAll(void) const;
 
 	EntityArray			&operator=(EntityArray const &rhs);
@@ -38,6 +42,9 @@ protected:
 	AEntity				**_ents;
 
 	int					_count;
+	int					_alloc;
+
+	void				_extend(void);
 
 private:
 };
