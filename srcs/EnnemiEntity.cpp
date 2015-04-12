@@ -37,7 +37,7 @@ void					EnnemiEntity::update(float t)
 		_rest--;
 	}
 	_weapon->canShoot(t, *this);
-	if (_y > GAME_HEIGHT)
+	if (_y > (GAME_HEIGHT - _height - 1))
 		_hp = 0;
 }
 
