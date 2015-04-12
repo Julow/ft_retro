@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 17:53:02 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:55:34 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void				Game::start(void)
 			last_update = tmp;
 			_handleKey(key);
 			_update(t);
-			_render();
+			if (this->isGameover())
+				break ;
+			else
+				_render();
 		}
 	}
 }
@@ -184,6 +187,30 @@ void				Game::_printBorder(void)
 		}
 		y++;
 	}
+}
+
+bool				Game::isGameover()
+{
+	const char *over = "_____                                             \n\
+	  / ____|                                            \n\
+	 | |  __  __ _ _ __ ___   ___    _____   _____ _ __  \n\
+	 | | |_ |/ _` | '_ ` _ \\ / _ \\  / _ \\ \\ / / _ \\ '__| \n\
+	 | |__| | (_| | | | | | |  __/ | (_) \\ V /  __/ |    \n\
+	  \\_____|\\__,_|_| |_| |_|\\___|  \\___/ \\_/ \\___|_|    ";
+
+	
+	if (this->_player->getHP() <= 0)
+	{
+		erase();
+		attron(COLOR_PAIR(2));
+		this->wmove(this->_offset.x, this->_offset.y);
+		printw(over);
+		refresh();
+		timeout(-1);
+		getch();
+		return (true);
+	}
+	return (false);
 }
 
 void				Game::_printGameInfo(void)
