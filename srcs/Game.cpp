@@ -6,12 +6,11 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:41:09 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:05:29 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
-#include <thread>
 #include <chrono>
 
 Game::Game(void)
@@ -131,14 +130,14 @@ void				Game::_update(float t)
 	/*
 	 * Updating...
 	 */
-	AEntity				*ent;
+	// AEntity				*ent;
 
-	ent = _ents.collideAll(*_player, _player->getType());
-	if (ent != NULL)
-		_player->damage(_player->getHP());
-	ent = _projectiles.collideAll(*_player, _player->getType());
-	if (ent != NULL)
-		_player->damage(((Projectile*)ent)->getDmg());
+	// ent = _ents.collideAll(*_player, _player->getType());
+	// if (ent != NULL)
+		// _player->damage(_player->getHP());
+	// ent = _projectiles.collideAll(*_player, _player->getType());
+	// if (ent != NULL)
+		// _player->damage(((Projectile*)ent)->getDmg());
 	_ents.updateAll(t);
 	_player->update(t);
 	_projectiles.updateAll(t);
@@ -146,7 +145,7 @@ void				Game::_update(float t)
 
 void				Game::_render(void)
 {
-	clear();
+	erase();
 	_printBorder();
 	_printGameInfo();
 	_ents.renderAll();

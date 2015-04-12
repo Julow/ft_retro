@@ -6,11 +6,12 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:05:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:35:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 16:43:39 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AEntity.hpp"
+#include "Game.hpp"
 
 AEntity::AEntity(Game &game, AEntity::e_type type, std::string const &pattern, int x, int y, int w, int h, int hp)
 	: HitBox(x, y, w, h), _game(game), _pattern(pattern), _type(type), _hp(hp)
@@ -43,9 +44,26 @@ void				AEntity::damage(int dmg)
 
 void				AEntity::render(void)
 {
-	attron(COLOR_PAIR(3));
-	wmove(stdscr, _y, _x);
-	printw(_pattern.c_str());
+	int					i;
+	int					bing;
+	char const			*str;
+
+	attron(COLOR_PAIR(5));
+	bing = 0;
+	_game.wmove(_x, _y);
+	i = 0;
+	str = this->_pattern.c_str();
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			bing++;
+			_game.wmove(_x, _y + bing);
+		}
+		else
+			addch(str[i]);
+		i++;
+	}	
 }
 
 std::string			AEntity::getPattern(void) const

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:38:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:47:27 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:05:13 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ public:
 
 	AEntity				*get(int i) const;
 	void				add(AEntity *ent);
-	AEntity				*rem(int i);
+	void				rem(int i);
 
 	int					count(void) const;
 
-	AEntity				*collideAll(AEntity &ent, AEntity::e_type ownType);
+	int					collideAll(AEntity &ent, AEntity::e_type ownType);
 
 	void				updateAll(float t);
 	void				renderAll(void) const;

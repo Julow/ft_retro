@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:55 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:23:35 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 16:42:14 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void					EnnemiEntity::update(float t)
 {
 	moveToDirection(0, (t * _moveSpeed));
 	_weapon->canShoot(t, *this);
+	// moveToDirection(0, 1);
+	if (_y > GAME_HEIGHT)
+		_hp = 0;
 }
 
 void					EnnemiEntity::spawn(Game &game, std::string const &type, int x, int y)
@@ -45,28 +48,4 @@ void					EnnemiEntity::spawn(Game &game, std::string const &type, int x, int y)
 			return ;
 		}
 	}
-}
-
-void				EnnemiEntity::render(void)
-{
-	int					i;
-	int					bing;
-	char const			*str;
-
-	attron(COLOR_PAIR(5));
-	bing = 0;
-	_game.wmove(_x, _y);
-	i = 0;
-	str = this->_pattern.c_str();
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\n')
-		{
-			bing++;
-			_game.wmove(_x, _y + bing);
-		}
-		else
-			addch(str[i]);
-		i++;
-	}	
 }

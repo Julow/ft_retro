@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:51:29 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:10:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ EntityArray::EntityArray(EntityArray const &src)
 
 EntityArray::~EntityArray(void)
 {
+	int					i;
+
 	if (_ents != NULL)
+	{
+		for (i = 0; i < _count; i++)
+			delete _ents[i];
 		delete [] _ents;
+	}
 }
 
 AEntity				*EntityArray::get(int i) const
@@ -49,45 +55,61 @@ void				EntityArray::add(AEntity *ent)
 	_count++;
 }
 
-AEntity				*EntityArray::rem(int i)
+void				EntityArray::rem(int i)
 {
-	AEntity				*tmp;
-
 	if (i < 0 || i >= _count)
-	tmp = _ents[i];
+		return ;
+	delete _ents[i];
 	for (i++; i < _count; i++)
 		_ents[i - 1] = _ents[i];
 	_count--;
-	return (tmp);
 }
 
-AEntity				*EntityArray::collideAll(AEntity &ent, AEntity::e_type ownType)
+int					EntityArray::collideAll(AEntity &ent, AEntity::e_type ownType)
 {
 	int					i;
+	int					tmp;
 
 	for (i = 0; i < _count; i++)
 	{
-		if (_ents[i]->getType() != ownType && ent.collide(*_ents[i]))
-			return (_ents[i]);
+		if (!ent.collide(*_ents[i]))
+			continue ;
+		if (_ents[i]->getType() == AEntity::PROJECTILE)
+		{
+			if (((Projectile*)_ents[i])->getOwnerType() != ownType)
+			{
+				tmp = (((Projectile*)_ents[i])->getDmg());
+				rem(i);
+				return (tmp);
+			}
+		}
+		else if (_ents[i]->getType() != ownType)
+		{
+			rem(i);
+			return (50);
+		}
 	}
-	return (NULL);
+	return (0);
 }
 
 void				EntityArray::updateAll(float t)
 {
 	int					i;
-	Projectile			*tmp;
+	int					tmp;
 
 	for (i = 0; i < _count; i++)
 	{
 		if (_ents[i] != NULL)
 		{
-			tmp = (Projectile*)(&_ents[i]->getGame())->getProjectiles().collideAll(*_ents[i], _ents[i]->getType());
-			if (tmp != NULL)
-				_ents[i]->damage(tmp->getDmg());
+			if (_ents[i]->getType() != AEntity::PROJECTILE)
+			{
+				tmp = _ents[i]->getGame().getProjectiles().collideAll(*_ents[i], _ents[i]->getType());
+				_ents[i]->damage(tmp);
+			}
 			_ents[i]->update(t);
 			if (_ents[i]->getHP() <= 0)
 			{
+				delete _ents[i];
 				rem(i);
 				i--;
 			}

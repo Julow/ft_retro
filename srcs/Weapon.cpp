@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:25:56 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:17:35 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 16:56:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ Projectile		*Weapon::createProjectile(AEntity &owner)
 {
 	Projectile		*project;
 
-	project = new Projectile(owner.getGame(), owner.getType(), owner.getX(), owner.getY(), _dmg);
+	project = new Projectile(owner.getGame(), owner.getType(), owner.getX() + (owner.getWidth() / 2), owner.getY(), _dmg);
 	owner.getGame().getProjectiles().add(project);
 	return (project);
 }

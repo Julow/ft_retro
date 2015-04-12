@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 17:19:07 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:22:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:00:46 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ AEntity::e_type		Projectile::getOwnerType(void) const
 
 void				Projectile::update(float t)
 {
-	moveToDirection(0, -40 * t);
-	if (_y < 0)
+	moveToDirection(0, 25 * t * ((_ownType == AEntity::PLAYER) ? -1 : 1));
+	if (_y < 0 || _y >= GAME_HEIGHT)
 	{
 		_hp = 0;
 		return ;

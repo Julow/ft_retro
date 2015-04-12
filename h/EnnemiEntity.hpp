@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:24:01 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 16:43:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include "Game.hpp"
 # include <string>
 
-# define FLY_WIDTH 1
-# define FLY_HEIGHT 1
-# define SHIT_WIDTH 2
-# define SHIT_HEIGHT 2
+# define FLY_WIDTH		1
+# define FLY_HEIGHT		1
+# define SHIT_WIDTH		2
+# define SHIT_HEIGHT	2
 
 class	EnnemiEntity : public AEntity
 {
@@ -42,8 +42,6 @@ public:
 	virtual ~EnnemiEntity(void);
 
 	virtual void		update(float t);
-
-	virtual void		render(void);
 
 	static void			spawn(Game &game, std::string const &type, int x, int y);
 
