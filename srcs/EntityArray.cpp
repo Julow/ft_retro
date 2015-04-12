@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:16:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 17:10:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:15:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void				EntityArray::updateAll(float t)
 			_ents[i]->update(t);
 			if (_ents[i]->getHP() <= 0)
 			{
-				delete _ents[i];
 				rem(i);
 				i--;
 			}

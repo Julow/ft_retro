@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:10:22 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/11 18:22:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:49:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				main(void)
 	initscr();
 	initColors();
 	noecho();
-	timeout(150);
+	timeout(0);
 	curs_set(0);
 	keypad(stdscr, TRUE);
 	game.start();

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:55 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 16:42:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:20:59 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 const EnnemiEntity::s_ennemi	g_ennemies[] = {
 	{"Fly", "*", 1, 1, 10, 10, new Weapon(1, 1)},
-	{"Shit", "==\n**", 2, 2, 100, 2, new Weapon(20, 5)}
+	{"Shit", "==\n**", 2, 2, 100, 10, new Weapon(20, 5)}
 };
 
 EnnemiEntity::EnnemiEntity(Game &g, std::string const &p, int x, int y, int width, int h, int s, int hp, Weapon *w)

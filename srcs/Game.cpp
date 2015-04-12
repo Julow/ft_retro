@@ -6,12 +6,12 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 17:05:29 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:53:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
-#include <chrono>
+#include <ctime>
 
 Game::Game(void)
 	: _ents(), _projectiles(), _spawnTimeout(5), _score(0), _level(0)
@@ -28,16 +28,24 @@ Game::~Game(void)
 void				Game::start(void)
 {
 	clock_t				last_update;
+	clock_t				tmp;
 	float				t;
+	int					key;
 
-
-	last_update = clock();
+	last_update = std::clock();
+	key = '\0';
 	while (true)
 	{
-		_handleKey(getch());
-		t = (float)(clock() - last_update) / CLOCKS_PER_SEC;
-		_update(t);
-		_render();
+		tmp = std::clock();
+		t = (float)(tmp - last_update) / CLOCKS_PER_SEC;
+		key = getch();
+		if (key != '\0' || t > FPS)
+		{
+			last_update = tmp;
+			_handleKey(key);
+			_update(t);
+			_render();
+		}
 	}
 }
 
@@ -130,14 +138,8 @@ void				Game::_update(float t)
 	/*
 	 * Updating...
 	 */
-	// AEntity				*ent;
-
-	// ent = _ents.collideAll(*_player, _player->getType());
-	// if (ent != NULL)
-		// _player->damage(_player->getHP());
-	// ent = _projectiles.collideAll(*_player, _player->getType());
-	// if (ent != NULL)
-		// _player->damage(((Projectile*)ent)->getDmg());
+	_player->damage(_ents.collideAll(*_player, _player->getType()));
+	_player->damage(_projectiles.collideAll(*_player, _player->getType()));
 	_ents.updateAll(t);
 	_player->update(t);
 	_projectiles.updateAll(t);

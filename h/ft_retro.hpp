@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:10:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 12:15:33 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 17:49:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define GAME_HEIGHT	50
 
 # define EPADDING		5
+
+# define FPS			(30 / 1000)
 
 typedef struct	s_pt
 {

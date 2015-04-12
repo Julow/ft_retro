@@ -12,7 +12,7 @@ HEADS := -Ih
 
 all: $(NAME)
 
-o/AEntity.cpp.o: srcs/AEntity.cpp h/AEntity.hpp
+o/AEntity.cpp.o: srcs/AEntity.cpp h/AEntity.hpp h/Game.hpp
 	@$(COMPILE)
 o/colors.cpp.o: srcs/colors.cpp h/ft_retro.hpp
 	@$(COMPILE)
