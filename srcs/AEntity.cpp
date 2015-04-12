@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:05:58 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 16:43:39 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 19:39:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void				AEntity::render(void)
 	int					bing;
 	char const			*str;
 
+	if (_y < 0)
+		return ;
 	attron(COLOR_PAIR(5));
 	bing = 0;
 	_game.wmove(_x, _y);

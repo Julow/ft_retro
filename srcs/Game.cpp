@@ -6,15 +6,16 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 17:55:34 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 19:45:13 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
-#include <ctime>
+#include <unistd.h>
+#include <cstdlib>
 
 Game::Game(void)
-	: _ents(), _projectiles(), _spawnTimeout(5), _score(0), _level(0)
+	: _ents(), _projectiles(), _level(*this), _score(0)
 {
 	_tbegin = std::time(0);
 	_player = new PlayerEntity(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT));
@@ -72,6 +73,11 @@ t_pt				Game::getOffset(void) const
 	return (_offset);
 }
 
+void				Game::addScore(int s)
+{
+	_score += s;
+}
+
 void				Game::wmove(int x, int y) const
 {
 	::wmove(stdscr, y + _offset.y, x + _offset.x);
@@ -108,39 +114,7 @@ void				Game::_handleKey(int key)
 
 void				Game::_update(float t)
 {
-	/*
-	 * Generating the ennemies waves
-	 */
-	if (this->getEntities().count() <= 0)
-	{
-		int				ennemies;
-		int				i;
-		int				j;
-		int				cols;
-		int				rows;
-
-		this->_level += 1;
-		ennemies = this->_level * 5;
-		cols = (int)(GAME_WIDTH / (SHIT_WIDTH + EPADDING));
-		rows = (int)(ennemies / cols);
-		rows = (rows <= 0) ? 1 : rows;
-
-		i = 0;
-		while (i < rows)
-		{
-			j = 0;
-			while (j < cols)
-			{
-				EnnemiEntity::spawn(*this, "Shit", j * (SHIT_WIDTH + EPADDING), i * (SHIT_HEIGHT + 1) );
-				j++;
-			}
-			i++;
-		}
-	}
-
-	/*
-	 * Updating...
-	 */
+	_level.update();
 	_player->damage(_ents.collideAll(*_player, _player->getType()));
 	_player->damage(_projectiles.collideAll(*_player, _player->getType()));
 	_ents.updateAll(t);
@@ -191,7 +165,7 @@ void				Game::_printBorder(void)
 
 bool				Game::isGameover()
 {
-	const char *over =
+	static const char *over =
 "\n   _____                                             \n\
   / ____|                                            \n\
  | |  __  __ _ _ __ ___   ___    _____   _____ _ __  \n\
@@ -208,6 +182,7 @@ bool				Game::isGameover()
 		printw(over);
 		refresh();
 		timeout(-1);
+		sleep(1);
 		getch();
 		return (true);
 	}
@@ -220,23 +195,23 @@ void				Game::_printGameInfo(void)
 
 	attron(COLOR_PAIR(4));
 	move(_offset.y - 4, _offset.x);
-	printw("Score: ");
+	printw("%-10s", "Score");
 	attron(COLOR_PAIR(1));
-	printw("%d", this->_score);
+	printw("%-15d", this->_score);
 	attron(COLOR_PAIR(4));
-	printw("\t\tLevel: ");
+	printw("%-10s", "Level");
 	attron(COLOR_PAIR(1));
-	printw("%d", this->_level);
+	printw("%-15d", _level.getLevel());
 	attron(COLOR_PAIR(4));
-	printw("\t\t Time: ");
+	printw("%-10s", "Time");
 	attron(COLOR_PAIR(1));
-	printw(" %d", (time(NULL) - _tbegin));
+	printw("%-15d", (time(NULL) - _tbegin));
 	attron(COLOR_PAIR(4));
-	printw("\t\t\tLifes: ");
+	printw("%-10s", "Lifes");
 	attron(COLOR_PAIR(2));
-	i = this->_player->getHP() / 20;
+	i = this->_player->getHP() * 15 / 100;
 	while (i-- > 0)
-		printw("<3 ");
+		printw("=");
 	attron(COLOR_PAIR(0));
 }
 

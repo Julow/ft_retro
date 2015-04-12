@@ -24,6 +24,8 @@ o/Game.cpp.o: srcs/Game.cpp h/Game.hpp
 	@$(COMPILE)
 o/HitBox.cpp.o: srcs/HitBox.cpp h/HitBox.hpp
 	@$(COMPILE)
+o/Level.cpp.o: srcs/Level.cpp h/Level.hpp h/Game.hpp
+	@$(COMPILE)
 o/main.cpp.o: srcs/main.cpp h/ft_retro.hpp h/Game.hpp
 	@$(COMPILE)
 o/PlayerEntity.cpp.o: srcs/PlayerEntity.cpp h/PlayerEntity.hpp h/Game.hpp
@@ -44,6 +46,7 @@ O_FILES := o/AEntity.cpp.o \
 		o/EntityArray.cpp.o \
 		o/Game.cpp.o \
 		o/HitBox.cpp.o \
+		o/Level.cpp.o \
 		o/main.cpp.o \
 		o/PlayerEntity.cpp.o \
 		o/Projectile.cpp.o \

@@ -6,16 +6,16 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:55 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 17:20:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 19:46:49 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "EnnemiEntity.hpp"
 
 EnnemiEntity::s_bad		EnnemiEntity::monsters[] = {
-	{"Fly", "*", 1, 1, 10, 10, new Weapon(1, 1)},
-	{"Shit", "==\n**", 2, 2, 100, 10, new Weapon(20, 5)},
-	{"Snake", "(\n)\n(\n)\n0", 1, 5, 100, 10, new Weapon(20, 5)},
+	{"Fly", "*", 1, 1, 1, 20, new Weapon(1, 1)},
+	{"Shit", "==\n**", 2, 2, 10, 8, new Weapon(15, 2)},
+	{"Snake", "(\n)\n(\n)\n0", 1, 5, 20, 3, new Weapon(35, 4)},
 	{"", "", 0, 0, 0, 0, NULL}
 };
 
@@ -26,6 +26,7 @@ EnnemiEntity::EnnemiEntity(Game &g, std::string const &p, int x, int y, int widt
 
 EnnemiEntity::~EnnemiEntity(void)
 {
+	_game.addScore(1);
 }
 
 void					EnnemiEntity::update(float t)

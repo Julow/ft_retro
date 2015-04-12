@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Level.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/11 13:10:22 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 19:31:54 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/04/12 18:50:27 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/04/12 19:40:48 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_retro.hpp"
-#include "Game.hpp"
-#include <cstdlib>
+#ifndef LEVEL_HPP
+# define LEVEL_HPP
 
-int				main(void)
+# include "ft_retro.hpp"
+
+# define SPAWN_HEIGHT	30
+
+class	Level
 {
-	Game			game;
+public:
+	Level(Game &game);
+	virtual ~Level(void);
 
-	srand(time(NULL));
-	initscr();
-	initColors();
-	noecho();
-	timeout(0);
-	curs_set(0);
-	keypad(stdscr, TRUE);
-	game.start();
-	endwin();
-	return (0);
-}
+	int				getLevel(void) const;
+
+	void			update();
+
+protected:
+	Game			&_game;
+
+	int				_level;
+
+	void			_newLevel(void);
+
+private:
+	Level(void);
+	Level(Level const &src);
+
+	Level			&operator=(Level const &rhs);
+};
+
+#endif

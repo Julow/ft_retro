@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 13:24:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 14:44:12 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 19:10:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "PlayerEntity.hpp"
 # include "EntityArray.hpp"
 # include "EnnemiEntity.hpp"
+# include "Level.hpp"
 # include <sstream>
 # include <ctime>
 
@@ -31,6 +32,9 @@ public:
 	EntityArray		&getEntities(void);
 	EntityArray		&getProjectiles(void);
 	PlayerEntity	&getPlayer(void);
+	int				getLevel(void) const;
+
+	void			addScore(int s);
 
 	t_pt			getOffset(void) const;
 	void			wmove(int x, int y) const;
@@ -38,24 +42,23 @@ public:
 protected:
 	EntityArray		_ents;
 	EntityArray		_projectiles;
-
 	PlayerEntity	*_player;
 
 	t_pt			_offset;
 
-	float			_spawnTimeout;
+	Level			_level;
 
+	int				_score;
+	time_t			_tbegin;
+
+	void			_update(float t);
 	void			_updateOffset(void);
 	void			_handleKey(int key);
-	void			_update(float t);
+	bool			isGameover();
+
 	void			_render(void);
 	void			_printBorder(void);
 	void			_printGameInfo(void);
-	int				_score;
-	time_t			_tbegin;
-	int				_level;
-	bool			isGameover();
-
 	double			_getGameTime(void);
 
 private:

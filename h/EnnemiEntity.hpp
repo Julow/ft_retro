@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:53 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 16:43:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 19:20:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 # include "Weapon.hpp"
 # include "Game.hpp"
 # include <string>
-
-# define FLY_WIDTH		1
-# define FLY_HEIGHT		1
-# define SHIT_WIDTH		1
-# define SHIT_HEIGHT	5
 
 class	EnnemiEntity : public AEntity
 {
