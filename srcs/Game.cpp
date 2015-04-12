@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Game.hpp"
+#include <thread>
+#include <chrono>
 
 Game::Game(void)
 	: _ents(), _projectiles() , _player(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT)), _score(0)
@@ -36,6 +38,7 @@ void				Game::start(void)
 		t = (clock() - last_update) / CLOCKS_PER_SEC;
 		_update(t);
 		_render();
+		// std::this_thread::sleep_for (std::chrono::microseconds(50));
 	}
 }
 
@@ -82,6 +85,10 @@ void				Game::_handleKey(int key)
 		_player.moveToDirection(1, 0);
 	else if (key == KEY_LEFT)
 		_player.moveToDirection(-1, 0);
+	else if (key == ' ')
+	{
+		printw("Shoot here !");
+	}
 	else
 		_updateOffset();
 }
