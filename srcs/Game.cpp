@@ -97,9 +97,9 @@ void				Game::_render(void)
 	clear();
 	_printBorder(); // Prints the game border
 	_printGameInfo();
-	// _ents.renderAll();
-	// _player.render();
-	// _projectiles.renderAll();
+	_ents.renderAll();
+	_player.render();
+	_projectiles.renderAll();
 	refresh();
 }
 
@@ -135,20 +135,9 @@ void				Game::_printBorder(void)
 
 void				Game::_printGameInfo(void)
 {
-	std::ostringstream	oss;
-
 	attron(COLOR_PAIR(2));
 	move(_offset.y - 6, _offset.x);
-	printw("Score: ");
-	oss << this->_score;
-	printw(oss.str().c_str());
-	printw("\t\t");
-	printw("Time: ");
-	oss.str("");
-	oss.clear();
-	oss << (time(NULL) - _tbegin) << " sec";
-	printw(oss.str().c_str());
-	printw("\t\t");
-	printw("Lifes: ");
+	printw("Score: %d \t\t Time: %d ", this->_score, (time(NULL) - _tbegin));
+	printw("\t\t\tLifes: ");
 	printw("<3 <3 <3");
 }

@@ -36,4 +36,6 @@ class	Weapon;
 class	EntityArray;
 class	Projectile;
 
+void					initColors(void);
+
 #endif

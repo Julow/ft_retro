@@ -18,8 +18,9 @@ int				main(void)
 	Game			game;
 
 	initscr();
+	initColors();
 	noecho();
-	timeout(30);
+	timeout(60);
 	curs_set(0);
 	keypad(stdscr, TRUE);
 	game.start();
