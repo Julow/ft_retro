@@ -40,6 +40,7 @@ void						PlayerEntity::render(void)
 	int					bing;
 	char const			*str;
 
+	attron(COLOR_PAIR(4));
 	bing = 0;
 	_game.wmove(_x, _y);
 	i = 0;

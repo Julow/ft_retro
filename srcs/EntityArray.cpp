@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "EntityArray.hpp"
+#include <iostream>
 
 EntityArray::EntityArray(void)
 	: _ents(NULL), _count(0)

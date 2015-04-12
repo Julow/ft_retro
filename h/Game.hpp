@@ -53,6 +53,7 @@ protected:
 	void			_printGameInfo(void);
 	int				_score;
 	time_t			_tbegin;
+	int				_level;
 
 	double			_getGameTime(void);
 

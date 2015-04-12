@@ -15,7 +15,7 @@
 #include <chrono>
 
 Game::Game(void)
-	: _ents(), _projectiles(), _spawnTimeout(5), _score(0)
+	: _ents(), _projectiles(), _spawnTimeout(5), _score(0), _level(0)
 {
 	_tbegin = std::time(0);
 	_player = new PlayerEntity(*this, (GAME_WIDTH / 2) - (int)(PLAYER_WIDTH / 2), (GAME_HEIGHT - 1 - PLAYER_HEIGHT));
@@ -101,7 +101,39 @@ void				Game::_handleKey(int key)
 
 void				Game::_update(float t)
 {
-	// EnnemiEntity::spawn("Fly", 50,50);
+	/*
+	 * Generating the ennemies waves
+	 */
+	if (this->getEntities().count() <= 0)
+	{
+		int				ennemies;
+		int				i;
+		int				j;
+		int				cols;
+		int				rows;
+
+		this->_level += 1;
+		ennemies = this->_level * 5;
+		cols = (int)(GAME_WIDTH / (SHIT_WIDTH + EPADDING));
+		rows = (int)(ennemies / cols);
+		rows = (rows <= 0) ? 1 : rows;
+
+		i = 0;
+		while (i < rows)
+		{
+			j = 0;
+			while (j < cols)
+			{
+				EnnemiEntity::spawn(*this, "Shit", j * (SHIT_WIDTH + EPADDING), i * (SHIT_HEIGHT + 1) );
+				j++;
+			}
+			i++;
+		}
+	}
+
+	/*
+	 * Updating...
+	 */
 	_ents.updateAll(t);
 	_player->update(t);
 	_projectiles.updateAll(t);
@@ -157,6 +189,10 @@ void				Game::_printGameInfo(void)
 	printw("Score: ");
 	attron(COLOR_PAIR(1));
 	printw("%d", this->_score);
+	attron(COLOR_PAIR(4));
+	printw("\t\tLevel: ");
+	attron(COLOR_PAIR(1));
+	printw("%d", this->_level);
 	attron(COLOR_PAIR(4));
 	printw("\t\t Time: ");
 	attron(COLOR_PAIR(1));

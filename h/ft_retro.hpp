@@ -22,6 +22,8 @@
 # define GAME_WIDTH		100
 # define GAME_HEIGHT	50
 
+# define EPADDING		5
+
 typedef struct	s_pt
 {
 	int				x;
