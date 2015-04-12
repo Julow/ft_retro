@@ -20,6 +20,7 @@ int				main(void)
 	initscr();
 	noecho();
 	timeout(30);
+	curs_set(0);
 	keypad(stdscr, TRUE);
 	game.start();
 	endwin();

@@ -96,6 +96,7 @@ void				Game::_render(void)
 {
 	clear();
 	_printBorder(); // Prints the game border
+	_printGameInfo();
 	// _ents.renderAll();
 	// _player.render();
 	// _projectiles.renderAll();
