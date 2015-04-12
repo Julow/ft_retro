@@ -21,13 +21,13 @@
 
 # define FLY_WIDTH		1
 # define FLY_HEIGHT		1
-# define SHIT_WIDTH		2
-# define SHIT_HEIGHT	2
+# define SHIT_WIDTH		1
+# define SHIT_HEIGHT	5
 
 class	EnnemiEntity : public AEntity
 {
 public:
-	struct	s_ennemi
+	struct	s_bad
 	{
 		std::string		name;
 		std::string		pattern;
@@ -44,6 +44,8 @@ public:
 	virtual void		update(float t);
 
 	static void			spawn(Game &game, std::string const &type, int x, int y);
+
+	static s_bad		monsters[];
 
 protected:
 	Weapon				*_weapon;

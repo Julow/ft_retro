@@ -12,10 +12,12 @@
 
 #include "EnnemiEntity.hpp"
 
-const EnnemiEntity::s_ennemi	g_ennemies[] = {
+EnnemiEntity::s_bad		EnnemiEntity::monsters[] = {
 	{"Fly", "*", 1, 1, 10, 10, new Weapon(1, 1)},
-	{"Shit", "==\n**", 2, 2, 100, 10, new Weapon(20, 5)}
-};
+	{"Shit", "==\n**", 2, 2, 100, 10, new Weapon(20, 5)},
+	{"Snake", "(\n)\n(\n)\n0", 1, 5, 100, 10, new Weapon(20, 5)},
+	{"", "", 0, 0, 0, 0, NULL}
+}
 
 EnnemiEntity::EnnemiEntity(Game &g, std::string const &p, int x, int y, int width, int h, int s, int hp, Weapon *w)
 	: AEntity(g, ENNEMI, p, x, y, width, h, hp), _weapon(w), _pattern(p), _rest(0), _moveSpeed(s)
@@ -43,12 +45,12 @@ void					EnnemiEntity::spawn(Game &game, std::string const &type, int x, int y)
 {
 	int						i;
 
-	for (i = 0; i < 2; i++)
+	for (i = 0; monsters[i].weapon != NULL; i++)
 	{
-		if (type.compare(g_ennemies[i].name) == 0)
+		if (type.compare(monsters[i].name) == 0)
 		{
-			game.getEntities().add(new EnnemiEntity(game, g_ennemies[i].pattern, x, y,
-				g_ennemies[i].width, g_ennemies[i].height, g_ennemies[i].speed, g_ennemies[i].hp, g_ennemies[i].weapon));
+			game.getEntities().add(new EnnemiEntity(game, monsters[i].pattern, x, y,
+				monsters[i].width, monsters[i].height, monsters[i].speed, monsters[i].hp, monsters[i].weapon));
 			return ;
 		}
 	}
