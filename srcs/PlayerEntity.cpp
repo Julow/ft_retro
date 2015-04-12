@@ -6,7 +6,7 @@
 /*   By: olysogub <olysogub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 16:36:40 by olysogub          #+#    #+#             */
-/*   Updated: 2015/04/12 14:46:24 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:16:12 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,25 @@ void						PlayerEntity::render(void)
 			addch(str[i]);
 		i++;
 	}
+}
+
+bool				PlayerEntity::moveToDirection(int x, int y)
+{
+	int			nx;
+	int			ny;
+
+	// Checking if the player wont go out of the screen
+	nx = this->_x + x;
+	ny = this->_y + y;
+	if (nx >= 0 && ny >= 0)
+	{
+		if (((nx + this->_width) < GAME_WIDTH) &&
+			((ny + this->_height) < GAME_HEIGHT))
+		{
+			this->_x = nx;
+			this->_y = ny;
+			return (true);
+		}
+	}
+	return (false);
 }

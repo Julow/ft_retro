@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 14:02:15 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 14:33:06 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 15:35:04 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ public:
 
 	virtual void			update(float t);
 	virtual void			render(void);
+
+	virtual bool			moveToDirection(int x, int y);
 
 protected:
 	Weapon					*_weapon;

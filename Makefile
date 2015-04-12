@@ -18,7 +18,7 @@ o/colors.cpp.o: srcs/colors.cpp h/ft_retro.hpp
 	@$(COMPILE)
 o/EnnemiEntity.cpp.o: srcs/EnnemiEntity.cpp h/EnnemiEntity.hpp
 	@$(COMPILE)
-o/EntityArray.cpp.o: srcs/EntityArray.cpp h/EntityArray.hpp
+o/EntityArray.cpp.o: srcs/EntityArray.cpp h/EntityArray.hpp h/Game.hpp
 	@$(COMPILE)
 o/Game.cpp.o: srcs/Game.cpp h/Game.hpp
 	@$(COMPILE)
