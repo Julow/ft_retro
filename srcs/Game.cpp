@@ -28,6 +28,7 @@ void				Game::start(void)
 	clock_t				last_update;
 	float				t;
 
+
 	last_update = clock();
 	while (true)
 	{
@@ -109,7 +110,8 @@ void				Game::_printBorder(void)
 	int					x;
 	int					y;
 
-	attron(COLOR_PAIR(1));
+	attron(COLOR_PAIR(3));
+
 	y = _offset.y - 1;
 	x = _offset.x - 1;
 	while (y < (GAME_HEIGHT + _offset.y))
@@ -120,12 +122,12 @@ void				Game::_printBorder(void)
 			if (y == (_offset.y - 1) || (y == (_offset.y + GAME_HEIGHT - 1)))
 			{
 				wmove(stdscr, y, x);
-				printw("=");
+				printw(" ");
 			}
 			else if (x == (_offset.x - 1) || (x == (_offset.x + GAME_WIDTH - 1)))
 			{
 				wmove(stdscr, y, x);
-				printw("|");
+				printw(" ");
 			}
 			x++;
 		}
@@ -135,9 +137,28 @@ void				Game::_printBorder(void)
 
 void				Game::_printGameInfo(void)
 {
-	attron(COLOR_PAIR(2));
-	move(_offset.y - 6, _offset.x);
-	printw("Score: %d \t\t Time: %d ", this->_score, (time(NULL) - _tbegin));
+	int				i;
+
+	attron(COLOR_PAIR(4));
+	move(_offset.y - 4, _offset.x);
+	printw("Score: ");
+	attron(COLOR_PAIR(1));
+	printw("%d", this->_score);
+	attron(COLOR_PAIR(4));
+	printw("\t\t Time: ");
+	attron(COLOR_PAIR(1));
+	printw(" %d", (time(NULL) - _tbegin));
+	attron(COLOR_PAIR(4));
 	printw("\t\t\tLifes: ");
-	printw("<3 <3 <3");
+	attron(COLOR_PAIR(2));
+	i = 0;
+	// /!\ Replace 3 with the number of hp
+	while (i < 3)
+	{
+		printw("<3 ");
+		i++;
+	}
+	attron(COLOR_PAIR(0));
 }
+
+
