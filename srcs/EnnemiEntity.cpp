@@ -6,16 +6,18 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 11:39:55 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 19:46:49 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 20:14:51 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "EnnemiEntity.hpp"
 
 EnnemiEntity::s_bad		EnnemiEntity::monsters[] = {
-	{"Fly", "*", 1, 1, 1, 20, new Weapon(1, 1)},
-	{"Shit", "==\n**", 2, 2, 10, 8, new Weapon(15, 2)},
-	{"Snake", "(\n)\n(\n)\n0", 1, 5, 20, 3, new Weapon(35, 4)},
+	{"Fly", "*", 1, 1, 1, 30, new Weapon(1, 1)},
+	{"Shit", "==\n**", 2, 2, 10, 15, new Weapon(15, 2)},
+	{"Snake", "(\n)\n(\n)\n0", 1, 5, 20, 5, new Weapon(35, 5)},
+	{"Big", "  ###\n #   #\n# \\ / #\n#     #\n #   #\n  ###", 7, 7, 50, 3, new Weapon(50, 5)},
+	{"BOSS", "///////////\n//       //\n//  > <  //\n//       //\n//       //\n///////////", 11, 6, 2000, 1, new Weapon(20, 1)},
 	{"", "", 0, 0, 0, 0, NULL}
 };
 

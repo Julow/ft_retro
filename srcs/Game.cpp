@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 15:24:29 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 19:45:13 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 20:13:35 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,21 +195,22 @@ void				Game::_printGameInfo(void)
 
 	attron(COLOR_PAIR(4));
 	move(_offset.y - 4, _offset.x);
-	printw("%-10s", "Score");
+	printw("%-9s", "Score");
 	attron(COLOR_PAIR(1));
-	printw("%-15d", this->_score);
+	printw("%-12d", this->_score);
 	attron(COLOR_PAIR(4));
-	printw("%-10s", "Level");
+	printw("%-9s", "Level");
 	attron(COLOR_PAIR(1));
-	printw("%-15d", _level.getLevel());
+	printw("%-12d", _level.getLevel());
 	attron(COLOR_PAIR(4));
-	printw("%-10s", "Time");
+	printw("%-9s", "Time");
 	attron(COLOR_PAIR(1));
-	printw("%-15d", (time(NULL) - _tbegin));
+	printw("%-12d", (time(NULL) - _tbegin));
 	attron(COLOR_PAIR(4));
-	printw("%-10s", "Lifes");
+	printw("%-9s", "Lifes");
 	attron(COLOR_PAIR(2));
-	i = this->_player->getHP() * 15 / 100;
+	printw("[%d%%] ", _player->getHP());
+	i = _player->getHP() * 20 / PLAYER_HP;
 	while (i-- > 0)
 		printw("=");
 	attron(COLOR_PAIR(0));

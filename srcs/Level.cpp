@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 18:50:30 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 19:48:24 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 20:15:44 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,15 @@ void			Level::update()
 
 void			Level::_newLevel(void)
 {
-	int				len;
 	int				toSpawn;
 
-	len = 0;
-	for (len = 0; EnnemiEntity::monsters[len].weapon != NULL; len++)
-		;
 	_level++;
 	toSpawn = _level * 2 + _level;
 	while (toSpawn-- > 0)
 	{
-		EnnemiEntity::spawn(_game, EnnemiEntity::monsters[rand() % len].name,
-			rand() % (GAME_WIDTH - 4) + 2, -(rand() % SPAWN_HEIGHT));
+		EnnemiEntity::spawn(_game, EnnemiEntity::monsters[rand() % 4].name,
+			rand() % (GAME_WIDTH - 8) + 4, -(rand() % SPAWN_HEIGHT));
 	}
+	if ((_level % 5) == 0)
+		EnnemiEntity::spawn(_game, "BOSS", rand() % (GAME_WIDTH - 10) + 5, 0);
 }

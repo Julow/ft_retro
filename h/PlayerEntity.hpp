@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/11 14:02:15 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/04/12 15:35:04 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/04/12 20:20:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define PLAYER_WIDTH	5
 # define PLAYER_HEIGHT	2
-# define PLAYER_HP		100
+# define PLAYER_HP		200
 
 class	PlayerEntity : public AEntity
 {
